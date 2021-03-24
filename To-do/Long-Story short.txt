@@ -1,0 +1,9 @@
+Long story short I want:
+
+    API DEVELOPMENT WITH FLASK and Python
+    Flutter for hybrid app development
+    DSA Above average performance
+
+what are the other options:
+    Python with automation tools
+    JAVA 
