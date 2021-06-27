@@ -7,7 +7,7 @@ public:
     int data;
     BSTnode *left, *right;
 };
-BSTnode *GetNewNode(int data); //* GETnew node Return spointer to a new node with data 
+BSTnode *GetNewNode(int data); //* GETnew node Return spointer to a new node with data
 BSTnode *insterBST(BSTnode *root, int data);
 void printInOrder(BSTnode *root);
 int FindMinBST(BSTnode *root);
@@ -358,3 +358,4 @@ void Bottom_View(BSTnode *root)
         cout << x.second << " ";
     }
 }
+hello peeps !
