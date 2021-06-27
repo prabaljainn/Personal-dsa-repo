@@ -27,6 +27,7 @@ void VerticleTraversal(BSTnode *root);
 void Top_View(BSTnode *root);
 void Bottom_View(BSTnode *root);
 void getnew();
+void newfun();
 int main()
 {
     BSTnode *root = nullptr;
@@ -358,4 +359,3 @@ void Bottom_View(BSTnode *root)
         cout << x.second << " ";
     }
 }
-hello peeps !
