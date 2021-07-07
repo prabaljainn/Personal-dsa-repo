@@ -14,6 +14,10 @@ int maxSum_Subarray(int *arr, int n);           //* Max sum Subarray prblm
 int maxSum_SubArray_Efficient(int *arr, int n); //* Max sum Subarray prblm WITH KADANE's Algo
 int max_Length_evenOdd(int *arr, int n);        //* Max length in an array with EVEN--ODD Sequence
 int majority_elem_index(int *arr, int n);       //* Famous Moore's Law implimentation O(n) while naive solution is O(n^2)
+//* Sliding Window tech
+//* Two pointer approach
+//* PREFIX sum array
+//* pair sum problem and triplet sum problem
 int main()
 {
     int arr[] = {8, 8, 6, 6, 6, 4, 6};
