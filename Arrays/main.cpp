@@ -1,23 +1,24 @@
 #include <bits/stdc++.h>
 using namespace std;
-int largestElementIndex(int *arr, int n); //* arr is array and n is the size of array
-bool arraySorted(int *arr, int n);
-void reverseArray(int *arr, int n);
-int removeRepeatedElm(int *arr, int n);
-void moveZerosAtEnd(int *arr, int n);
-void leader(int *arr, int n);
-void fzInSortedArray(int *arr, int n);
-int maxDifference_j_i(int *arr, int n); // max differnce so far such that arr[j] - arr[i] is max and where j>  i
-int Stock_Buy_sell(int *arr, int n);
-int maximun_cons_ones(int *arr, int n);
-int maxSum_Subarray(int *arr, int n);           //O(n^2)
-int maxSum_SubArray_Efficient(int *arr, int n); //Kadane's Algo
-int max_Length_evenOdd(int *arr, int n);
+int largestElementIndex(int *arr, int n);       //* returns Largest elem index
+bool arraySorted(int *arr, int n);              //* checks w an array is sorted or not
+void reverseArray(int *arr, int n);             //* Reverse an array
+int removeRepeatedElm(int *arr, int n);         //* removes repeated element and returns the new array size
+void moveZerosAtEnd(int *arr, int n);           //* it moves zeros to the end of the array
+void leader(int *arr, int n);                   //* prints the leader of an array----> Leader is elem which is the greatest amongs the elm to its right side
+void fzInSortedArray(int *arr, int n);          //* prints elem and its freq
+int maxDifference_j_i(int *arr, int n);         //* max differnce so far such that arr[j] - arr[i] is max and where j>i
+int Stock_Buy_sell(int *arr, int n);            //* stocks buy sell problem where you are Pre-given stock price : just print how much you can max earn
+int maximun_cons_ones(int *arr, int n);         //* Max cons 1 in an Binary array eg: arr= [0,1,1,1,1,0] ans is 4
+int maxSum_Subarray(int *arr, int n);           //* Max sum Subarray prblm
+int maxSum_SubArray_Efficient(int *arr, int n); //* Max sum Subarray prblm WITH KADANE's Algo
+int max_Length_evenOdd(int *arr, int n);        //* Max length in an array with EVEN--ODD Sequence
+int majority_elem_index(int *arr, int n);       //* Famous Moore's Law implimentation O(n) while naive solution is O(n^2)
 int main()
 {
-    int arr[] = {5, 10, 20, 63, 8};
+    int arr[] = {8, 8, 6, 6, 6, 4, 6};
     int size = sizeof(arr) / sizeof(arr[0]);
-    cout << max_Length_evenOdd(arr, size);
+    cout << arr[majority_elem_index(arr, size)];
 
     return 0;
 }
@@ -190,4 +191,37 @@ int max_Length_evenOdd(int *arr, int n)
         }
     }
     return max_len_so_far;
+}
+int majority_elem_index(int *arr, int n) //* this is not sure if there actually exists a Majority elem so we have to check also
+{
+    int current_index = 0;
+    int fz_of_value = 1;
+    for (int i = 1; i < n; i++)
+    {
+        if (arr[current_index] == arr[i])
+        {
+            fz_of_value++;
+        }
+        else
+
+            fz_of_value--;
+        if (fz_of_value == 0)
+        {
+            current_index = i;
+            fz_of_value = 1;
+        }
+    }
+    fz_of_value = 0;
+    for (int k = 0; k < n; k++)
+    {
+        if (arr[current_index] == arr[k])
+        {
+            fz_of_value++;
+        }
+    }
+
+    if (fz_of_value > n / 2)
+        return current_index;
+    else
+        return -1;
 }
