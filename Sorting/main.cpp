@@ -11,12 +11,14 @@ void merge(int *arr, int low, int mid, int high);                               
 void merge_sort(int *arr, int n);
 void quick_sort_Lomuto(int *arr, int n); //* implimentation of Q sort using Lumato partition
 void quick_sort_hoare(int *arr, int n);  //* implimentation of Q sort using Hoare partition
+void cycle_sort_distinct(int *arr, int n);
 int main()
 {
     vector<int> arr{2, 4, 6, 8, 10, 12, 14};
     vector<int> arr2{2, 4, 6, 8, 10, 12, 14};
-    int a[] = {10, 15, 20, 40, 8, 11, 15, 22, 25};
-    quick_sort_Lomuto(a, 9);
+    int a[] = {9, 8, 7, 4, 2, 1};
+    int size_of_array = sizeof(a) / sizeof(a[0]);
+    cycle_sort_distinct(a, size_of_array);
 
     for (int x : a)
         cout << x << " ";
@@ -172,6 +174,10 @@ void merge_sort(int *arr, int n)
 //** Lumato partition
 int lomuto_partition(int *arr, int low, int high)
 {
+    srand(time(0));
+    int pivot_index = low + rand() % (high - low);
+    swap(arr[high], arr[pivot_index]);
+
     int pivot = arr[high];
     int counter = low - 1;
     for (int i = low; i <= high - 1; i++)
@@ -198,4 +204,68 @@ void quick_sort_Lomuto(int *arr, int n) //* i have used qSort_Lomuto in order to
 {
 
     qSort_Lomuto(arr, 0, n - 1);
+}
+
+//* Hoare's partition
+int hoares_partition(int *arr, int low, int high)
+{
+
+    srand(time(0));
+    int pivot_index = low + rand() % (high - low);
+    swap(arr[low], arr[pivot_index]);
+
+    int pivot = arr[low];
+    int i = low - 1;
+    int j = high + 1;
+    while (true)
+    {
+        do
+        {
+            (i++);
+        } while (arr[i] < pivot);
+        do
+        {
+            j--;
+        } while (arr[j] > pivot);
+        if (i >= j)
+            return j;
+        swap(arr[i], arr[j]);
+    }
+}
+void qSort_hoares(int *arr, int low, int high)
+{
+    if (high > low)
+    {
+        int partition = hoares_partition(arr, low, high);
+        qSort_hoares(arr, low, partition);
+        qSort_hoares(arr, partition + 1, high);
+    }
+}
+void quick_sort_hoare(int *arr, int n)
+{
+    qSort_hoares(arr, 0, n - 1);
+}
+void cycle_sort_distinct(int *arr, int n)
+{
+    for (int cs = 0; cs < n - 1; cs++)
+    {
+        int elem = arr[cs];
+        int pos = cs;
+        for (int i = cs + 1; i < n; i++)
+        {
+            if (arr[i] < elem)
+                pos++;
+        }
+        swap(elem, arr[pos]);
+        while (pos != cs)
+        {
+            pos = cs;
+            for (int i = cs + 1; i < n; i++)
+            {
+                if (arr[i] < elem)
+                    pos++;
+            }
+            swap(elem, arr[pos]);
+        }
+    }
 }

@@ -20,9 +20,11 @@ int majority_elem_index(int *arr, int n);       //* Famous Moore's Law impliment
 //* pair sum problem and triplet sum problem
 int main()
 {
-    int arr[] = {8, 8, 6, 6, 6, 4, 6};
-    int size = sizeof(arr) / sizeof(arr[0]);
-    cout << arr[majority_elem_index(arr, size)];
+
+    vector<int> arr{1, -2, 3, -2};
+    // int size = sizeof(arr) / sizeof(arr[0]);
+    int size;
+    cin >> size;
 
     return 0;
 }
