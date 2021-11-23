@@ -2,6 +2,10 @@
 // The API isBadVersion is defined for you.
 // bool isBadVersion(int version);
 
+
+// TIP: The Bool Function is already given in this ques the isBadVersion returns if the version is bad or not you have to return first True so to speak
+// the monotonic f(x) returns FFFFFFFFFFFFTTTTTTTTTTTT YOU JUST NEED TO FIND FIRST TRUE
+
 class Solution {
 public:
     int firstBadVersion(int n) {
@@ -24,4 +28,3 @@ public:
         
     }
 };
-
