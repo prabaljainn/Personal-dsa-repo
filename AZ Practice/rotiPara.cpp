@@ -14,14 +14,11 @@ using namespace std;
 #define vi vector < int >
 #define int long long
 #define IOS ios::sync_with_stdio(0);
-bool rec(int l, int r){
-
-}
 int mod = 1e9+7;
 void solve(){
     
 }
-// 08
+
 signed main() {
 
  IOS

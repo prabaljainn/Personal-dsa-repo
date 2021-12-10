@@ -7,6 +7,7 @@
     5) first sighted observations always lead to AC, not overthinking
     6) always take MOD, always :(
 */
+//
 #include <bits/stdc++.h>
 using namespace std;
 #define OK cout << endl;
@@ -14,14 +15,11 @@ using namespace std;
 #define vi vector < int >
 #define int long long
 #define IOS ios::sync_with_stdio(0);
-bool rec(int l, int r){
-
-}
 int mod = 1e9+7;
 void solve(){
     
 }
-// 08
+
 signed main() {
 
  IOS

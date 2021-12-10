@@ -14,14 +14,38 @@ using namespace std;
 #define vi vector < int >
 #define int long long
 #define IOS ios::sync_with_stdio(0);
-bool rec(int l, int r){
-
-}
 int mod = 1e9+7;
+int n; int arr[100100];
+int dp[100100];
+int rec(int level){  // -> 0 based indexing, returns LIS at the level 
+	//base case if level ==0 that is in the case [1] return 1 length
+	if(level ==0)
+		return 1;
+	//dp check
+	if(dp[level]!= -1)
+		return dp[level];
+	int ans =1;
+
+	for(int i=0; i<level; i++){
+		if(arr[i]<arr[level]){
+			ans = max(ans, 1+ rec(i));
+		}
+	}
+	//save and return 
+	return dp[level]= ans;
+}
+
+
 void solve(){
+	memset(dp,-1,sizeof(dp));
+	cin>>n;
+	for(int i=0 ;i<n;i++)
+		cin>>arr[i];
+	cout<<rec(n-1);
+	OK
     
 }
-// 08
+
 signed main() {
 
  IOS
