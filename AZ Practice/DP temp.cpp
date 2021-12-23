@@ -15,32 +15,44 @@ using namespace std;
 #define int long long
 #define IOS ios::sync_with_stdio(0);
 int mod = 1e9+7;
-int n; int arr[100100];
-int dp[100100];
-int lis(vector<int> temp){
-	
+int dp[1001];
+int n;
+int rec(int level){
+  if(level ==n)
+    return 0;
+
+  if(dp[level]!= -1)
+    return dp[level];
+
+  int ans = 1e9;
+  
+  if(level*2 <= n)
+    ans  =  min (ans,2+ rec(level*2));
+  
+  if (level+1 <= n)
+    ans = min(ans, 1+ rec(level+1));
+
+  return dp[level]= ans;
+
 }
+
 void solve(){
-	memset(dp,-1,sizeof(dp));
-	cin>>n;
-	for(int i=0 ;i<n;i++)
-		cin>>arr[i];
-	cout<<rec(n-1);
-	OK
-	
+  cin>>n;
+  memset(dp,-1,sizeof(dp));
+  cout<<(1,0)<<endl;
 }
 
 signed main() {
 
-	IOS
-	cin.tie(0);
-	cout.tie(0);
+ IOS
+ cin.tie(0);
+ cout.tie(0);
    #ifndef ONLINE_JUDGE
-	freopen("input.txt", "r", stdin);
-	freopen("output.txt", "w", stdout);
+ freopen("input.txt", "r", stdin);
+ freopen("output.txt", "w", stdout);
    #endif
-    // int _t;cin >> _t;while (_t--) solve();
-	solve();
+    int _t;cin >> _t;while (_t--) solve();
+     // solve();
 
 
 

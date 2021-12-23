@@ -15,37 +15,41 @@ using namespace std;
 #define int long long
 #define IOS ios::sync_with_stdio(0);
 int mod = 1e9+7;
-int n; int arr[100100];
-int dp[100100];
-// For Total N states we are general -> n transitions so N^2 is the TC
 
-int rec(int level){  // -> 0 based indexing, returns LIS at the level 
-	//base case if level ==0 that is in the case [1] return 1 length
-	if(level ==0)
-		return 1;
-	//dp check
-	if(dp[level]!= -1)
-		return dp[level];
-	int ans =1;
+int binary_expo(int a, int b){
+	// bi_mod is mod for binary_expo func
+    int bi_mod = mod;
+    int ans=1;
 
-	for(int i=0; i<level; i++){
-		if(arr[i]<arr[level]){
-			ans = max(ans, 1+ rec(i));
-		}
-	}
-	//save and return 
-	return dp[level]= ans;
+    while(b){
+        if(b%2!=0){
+            ans=(ans%bi_mod*a%bi_mod)%bi_mod;
+
+        }
+        a = (a%bi_mod*a%bi_mod)%bi_mod;
+        b/=2;
+
+    }
+    return ans%bi_mod;
 }
 
-
 void solve(){
-	memset(dp,-1,sizeof(dp));
-	cin>>n;
-	for(int i=0 ;i<n;i++)
-		cin>>arr[i];
-	cout<<rec(n-1);
-	OK
-    
+    int n;
+    cin>>n;
+    if(n%2==1)
+    {
+    	cout<<-1<<endl;
+    }
+    else{
+    	int t = n/2;
+    	string final ;
+    	for(int i=0; i<t;i++){
+    		final+= "10";
+    	}
+    	
+    	cout<<final<<endl;
+
+    }
 }
 
 signed main() {
@@ -57,8 +61,8 @@ signed main() {
  freopen("input.txt", "r", stdin);
  freopen("output.txt", "w", stdout);
    #endif
-    // int _t;cin >> _t;while (_t--) solve();
-     solve();
+    int _t;cin >> _t;while (_t--) solve();
+     // solve();
 
 
 

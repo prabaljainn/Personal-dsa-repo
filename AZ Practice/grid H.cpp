@@ -5,18 +5,16 @@ using namespace std;
 #define vi vector < int >
 #define int long long
 #define IOS ios::sync_with_stdio(0);
-int arr[1003][1003];
+int arr[201][201];
 int n,m;
 int mod = 1e9+7;
-int dp[1003][1003];
+int dp[201][201][401];
 // you have to reach n-1, m-1 from any point i,j 
 // dp(i,j) ==> # nu of ways to reach from i,j to n-1, m-1
-int rec(int i, int j){
+int rec(int i, int j,int k){
   //base case
-  if(arr[i][j] ==1)
-    return 0;
-    
-    if(i==n-1 and j==m-1)
+  
+  if(i==n-1 and j==m-1)
     return 1;
   //restriction
   
@@ -34,12 +32,20 @@ int rec(int i, int j){
 
   int ans = 0;
   //compute
-  if(i+1 <= n-1)
-    ans = (ans%mod + rec(i+1,j)%mod)%mod;
-  if(j+1 <= m-1)
+  if(arr[i][j] ==1)
+  {
+    if(k>0)
+      ans = max(ans,)
+  }
 
-  ans= (ans%mod + rec(i,j+1)%mod)%mod;
 
+  else{
+    if(i+1 <= n-1)
+      ans = (ans%mod + rec(i+1,j)%mod)%mod;
+    if(j+1 <= m-1)
+
+      ans= (ans%mod + rec(i,j+1)%mod)%mod;
+  }
   return dp[i][j] = ans;
 
 }
@@ -52,9 +58,9 @@ void solve(){
     cin>>arr[i][j];
     dp[i][j] = -1;
   }
- }
+}
  // memset(dp,-1,sizeof(dp));
- cout<<rec(0,0)%mod<<endl;
+cout<<rec(0,0)%mod<<endl;
 
 }  
 

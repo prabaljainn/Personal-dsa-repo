@@ -15,20 +15,31 @@ using namespace std;
 #define int long long
 #define IOS ios::sync_with_stdio(0);
 int mod = 1e9+7;
-int n; int arr[100100];
-int dp[100100];
-int lis(vector<int> temp){
-	
+int n; char arr[10010];
+int dp[100][100];
+int rec(int l, int r){
+	//prune
+	if(l>r)
+		return 0;
+	//base
+	if(l==r)
+		return 1;
+    //dp check 
+	if(dp[l][r]!= -1)
+		return dp[l][r];
+
+    // int dp[l][r] = 0;
+    //computation
+	if(arr[l]==arr[r])
+		dp[l][r] = 2+ rec(l+1,r-1);
+
+	else{
+		dp[l][r] = max(rec(l+1,r),rec(l,r-1));
+	}
+
+	return dp[l][r];
 }
-void solve(){
-	memset(dp,-1,sizeof(dp));
-	cin>>n;
-	for(int i=0 ;i<n;i++)
-		cin>>arr[i];
-	cout<<rec(n-1);
-	OK
-	
-}
+
 
 signed main() {
 
@@ -40,7 +51,15 @@ signed main() {
 	freopen("output.txt", "w", stdout);
    #endif
     // int _t;cin >> _t;while (_t--) solve();
-	solve();
+     // solve();
+	memset(dp,-1,sizeof(dp));
+	cin>>n;
+ // cout<<n<<endl;
+	for(int i=0; i<n;i++)
+		cin>>arr[i];
+  // for(int i=0; i<n;i++)
+ 	// cout<<arr[i];
+	cout<<rec(0,n-1);
 
 
 
