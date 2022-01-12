@@ -17,8 +17,9 @@ int dx[] = {0,0,1,-1};
 int dy[] = {1,-1,0,0};
 
 int dis[1001][1001];
+ii parent[1001][1001];
 
-bool check(ii elem){	
+bool check(ii elem){
 	int x = elem.F;
 	int y = elem.S;
 	if(x<0 or x>=n or y<0 or y>= m or arr[x][y]=='#')
@@ -45,6 +46,7 @@ void bfs(ii st ){
 			if(!check(p))continue;
 			if(dis[p.F][p.S] > curd+1){
 				dis[p.F][p.S] = curd+1;
+				parent[p.F][p.S] = temp;
 				s.push(p);
 				//
 			}
@@ -73,12 +75,25 @@ void solve(){
 			}else if(arr[i][j]=='E'){
 				en.first = i;
 				en.second =j;
+
 				
 			}
 		}
 	}
 	bfs(st);
 	cout<<dis[en.F][en.S]<<endl;
+	
+	ii temp = en;
+	vector<ii> ans;
+	ans.push_back(temp);
+	while(temp!=st){
+		ans.push_back(parent[temp.F][temp.S]);
+		temp = parent[temp.F][temp.S];
+	}
+	reverse(ans.begin(),ans.end());
+	for(ii elm : ans){
+		cout<<elm.F<<" "<<elm.S<<endl;
+	}
 
 }
 

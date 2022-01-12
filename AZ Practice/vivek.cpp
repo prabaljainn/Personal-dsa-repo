@@ -1,95 +1,104 @@
-#include<bits/stdc++.h>
+#include"bits/stdc++.h"
 using namespace std;
+#define int long long
+#define mod 1000000007
 
-#define F first
-#define S second
+int n,m,q;
+vector<vector<int> >g;
+vector<int> col;
+int color;
 
-using ii = pair<int,int>;
-/*
-6 6
-S.#...
-......
-####.#
-E.##.#
-..#..#
-#....#
-*/
-
-int n,m;
-vector<string> arr;
-
-int dx[] = {1,1,1,0,-1,-1,-1,0};
-int dy[] = {1,0,-1,-1,-1,0,1,1};
-
-bool inside(int x,int y){
-	if(x<0||x>=n||y<0||y>=m||arr[x][y]=='#')return 0;
-	else return 1;
+int dfs(int node,int color){
+    col[node]=color;
+    for(auto v:g[node]){
+        if(col[v]==0){
+            dfs(v,color);
+        }
+    }
 }
 
-int dist[1010][1010];
-ii par[1010][1010];
+int checksize(int node){
+	int ans=0;
+    int x = col[node];
+    for (int i = 1; i <=n; i++)
+    {
+        if(col[i]==x){
+            ans++;
+        }
 
-void bfs(ii st){
-	for(int i=0;i<n;i++){
-		for(int j=0;j<m;j++){
-			dist[i][j] = 1e9;
-		}
-	}
-	dist[st.F][st.S] = 0;
-	queue<ii> q;
-	q.push(st);
-	while(!q.empty()){
-		ii cur = q.front();
-		q.pop();
-		int curd = dist[cur.F][cur.S];
-		for(int k=0;k<8;k++){
-			if(!inside(cur.F+dx[k],cur.S+dy[k]))continue;	
-			ii neigh = {cur.F+dx[k],cur.S+dy[k]};
-			if(dist[neigh.F][neigh.S] > curd+1){ // relax
-				dist[neigh.F][neigh.S] = curd+1;
-				par[neigh.F][neigh.S] = cur;
-				q.push(neigh);
-			}
-		}
-	}
+    }
+    cout<<ans<<endl;
 }
 
-int main(){
-		 #ifndef ONLINE_JUDGE
-	     freopen("input.txt", "r", stdin);
-	     freopen("output.txt", "w", stdout);
-	     #endif
-	cin>>n>>m;
-	arr.resize(n);
-	ii st,en;
-	for(int i=0;i<n;i++){
-		cin>>arr[i];
-		for(int j=0;j<m;j++){
-			if(arr[i][j]=='S'){
-				st = {i,j};
-			}else if(arr[i][j]=='E'){
-				en = {i,j};
-			}
-		}
-	}
-	bfs(st);
-	cout<<dist[en.F][en.S]<<endl;
-	for(int i=0;i<n;i++){
-		for(int j=0;j<m;j++){
-			cout<<dist[i][j]<<"\t";
-		}
-		cout<<endl;
-	}
+int checklink(int node1,int node2){
+    if(col[node1]==col[node2]){
+        cout<<"YES"<<endl;
+    }
+    else{
+         cout<<"NO"<<endl;
+    }
+}
 
-	ii temp = en;
-	vector<ii> path;
-	while(temp!=st){
-		path.push_back(temp);
-		temp = par[temp.F][temp.S];
-	}
-	path.push_back(st);
-	reverse(path.begin(), path.end());
-	for(auto v:path){
-		cout<<v.F<<" "<<v.S<<endl;
-	}
+void solve(){
+
+cin>>n>>m>>q;
+g.clear();
+g.resize(n+1);
+col.assign(n+1,0);
+for (int i = 0; i < m; i++)
+{
+    int a,b;
+    cin>>a>>b;
+    g[a].push_back(b);
+    g[b].push_back(a);
+}
+//to assign the same color of connected graph//
+  color =1;
+for (int i = 1; i <=n; i++)
+{
+    if(col[i]==0){
+    dfs(i,color);
+    color++;
+    }
+}
+
+map<int,int> m;
+for(int i= 1; i<=n; i++){
+	m[col[i]]++;
+
+}
+
+
+for (int i = 0; i < q; i++)
+{
+    int p;
+    cin>>p;
+   if(p==1){
+       int q;
+       cin>>q;
+       cout<<m[col[q]]<<endl;
+   }
+   else if(p==2){
+       int u,v;
+       cin>>u>>v;
+       checklink(u,v);
+   }
+}
+
+
+
+
+}
+
+signed main(){
+    ios_base::sync_with_stdio(0);
+    cin.tie(0);cout.tie(0);
+
+	 #ifndef ONLINE_JUDGE
+     freopen("input.txt", "r", stdin);
+     freopen("output.txt", "w", stdout);
+     #endif
+        solve();
+  
+
 }
