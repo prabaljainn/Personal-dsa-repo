@@ -1,1 +1,6 @@
-Bellman Ford Algorithm to find SSSP in any graph may contain negative cycles;
+Union Find Structure : 
+Merges 2 components of graph
+and find the node is in which component 
+Merge x and y Compomponent
+find xth component is in which one
+
